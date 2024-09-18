@@ -2,6 +2,13 @@
 
 A simple SEO package for Laravel that allows you to quickly create meta tags, json-ld, sitemaps, and RSS feeds.
 
+## Installation
+
+You can install the package via composer:
+
+```
+composer require mrgarest/seoforge
+```
 ## Example
 
 ### Meta tags
