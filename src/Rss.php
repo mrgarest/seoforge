@@ -1,6 +1,7 @@
 <?php
 
 namespace MrGarest\SeoForge;
+
 use Illuminate\Support\Facades\Response;
 
 class Rss
@@ -8,26 +9,48 @@ class Rss
     private $site = [];
     private $items = [];
 
+    /**
+     * Set channel title.
+     * @param string $str     Сhannel title
+     */
     public function setTitle(string $str)
     {
         $this->site[] = $this->tag('title', $str, true);
     }
 
+    /**
+     * Set channel description.
+     * @param string $str     Сhannel description
+     */
     public function setDescription(string $str)
     {
         $this->site[] = $this->tag('description', $str, true);
     }
 
+    /**
+     * Set channel link.
+     * @param string $url     Сhannel link
+     */
     public function setUrl(string $url)
     {
         $this->site[] = $this->tag('link', $url, false);
     }
 
+    /**
+     * Set Atom link.
+     * @param string $url     Atom link
+     */
     public function setAtomLink(string $url)
     {
         $this->site[] = '<atom:link href="' . $url . '" rel="self" type="application/rss+xml"/>';
     }
 
+    /**
+     * Set channel image.
+     * @param string $url     Image url
+     * @param string $title   Title
+     * @param string $link    Links to the site
+     */
     public function setImage(string $url, string $title, string $link)
     {
         $str = '<image>';
@@ -38,11 +61,24 @@ class Rss
         $this->site[] = $str;
     }
 
+    /**
+     * Set page language.
+     * @param string $language   Language code
+     */
     public function setLanguage(string $language)
     {
         $this->site[] = $this->tag('language', $language, true);
     }
 
+    /**
+     * Adds an item to the feed.
+     * @param string $title          Title
+     * @param string $description    Description
+     * @param string $text           Full text
+     * @param string $url            Link to the page
+     * @param string $pubDate        Date of publication (ISO 8601)
+     * @param string $image          Image url (optional)
+     */
     public function addItem(string $title, string $description, string $text, string $url, string $pubDate, $image = null)
     {
         $this->items[] = [
@@ -74,13 +110,14 @@ class Rss
             $str .= $this->tag('link', $value['url'], false);
             $str .= $this->tag('guid', $value['url'], false);
             $str .= $this->tag('description', strip_tags($value['description']), false);
-            // $str .= $this->tag('content:encoded', $value['text'], true);
+            $str .= $this->tag('content:encoded', $value['text'], true);
             $str .= $this->tag('pubDate', $value['pubDate'], false);
             if ($value['image'] != null) $str .= '<media:content medium="image" url="' . $value['image'] . '"/>';
             $str .= '</item>';
         }
         return $str;
     }
+
     /**
      * Build RSS.
      * @param bool $xmlDocument   Displaying a page as an XML document
@@ -99,6 +136,7 @@ class Rss
         $str .= '</rss>';
         return $xmlDocument ? Response::make($str, 200, ['Content-Type' => 'application/xml']) : $str;
     }
+
     /**
      * Delete added data.
      */

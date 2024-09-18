@@ -7,8 +7,11 @@ class ArticleSchema extends \MrGarest\SeoForge\Schema
     public const TYPE_ARTICLE = 'Article';
     public const TYPE_NEWS_ARTICLE = 'NewsArticle';
     public const TYPE_BLOG_POSTING = 'BlogPosting';
+    
+    public const AUTHOR_TYPE_PERSON = 'Person';
+    public const AUTHOR_TYPE_ORGANIZATION = 'Organization';
 
-    protected $publisherType = ['Person', 'Organization'];
+    protected $publisherType = [self::AUTHOR_TYPE_PERSON, self::AUTHOR_TYPE_ORGANIZATION];
 
     /**
      * @param string $type     Article type (Article, NewsArticle, BlogPosting)
@@ -87,13 +90,11 @@ class ArticleSchema extends \MrGarest\SeoForge\Schema
 
     /**
      * Set the article publisher.
-     * @param string $type    Use the Person type for people, and the Organization type for organizations
      * @param string $name    The name of the author
      * @param string $url     Link to images with logo
      */
-    public function setPublisher(string $type, string $name, string $logoUrl = null)
+    public function setPublisher(string $name, string $logoUrl = null)
     {
-        if (!in_array($type, $this->publisherType)) throw new \Exception('Invalid article publisher type');
         $this->JsonLD['publisher'] = [
             '@type' => 'Organization',
             'name' => $name
