@@ -47,7 +47,7 @@ class ArticleSchema extends \MrGarest\SeoForge\Schema
      * @param string $published     The date and time the article was first published (ISO 8601)
      * @param string $modified      The date and time the article was most recently modified (ISO 8601)
      */
-    public function setDate(string $published, string $modified = null)
+    public function setDate(string $published, ?string $modified = null)
     {
         $this->JsonLD['datePublished'] = $published;
         if ($modified != null) $this->JsonLD['dateModified'] = $modified;
@@ -57,7 +57,7 @@ class ArticleSchema extends \MrGarest\SeoForge\Schema
      * Set a link to the page with the article.
      * @param string $url     Link to article page
      */
-    public function setUrl(string $url = null)
+    public function setUrl(?string $url = null)
     {
         if ($url == null) {
             $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -78,7 +78,7 @@ class ArticleSchema extends \MrGarest\SeoForge\Schema
      * @param string $url     A link to a web page that uniquely identifies the author of the article
      * @throws Exception 
      */
-    public function setAuthor(string $type, string $name, string $url = null)
+    public function setAuthor(string $type, string $name, ?string $url = null)
     {
         if (!in_array($type, $this->publisherType)) throw new \Exception('Invalid article author type');
         $this->JsonLD['author'] = [
@@ -93,7 +93,7 @@ class ArticleSchema extends \MrGarest\SeoForge\Schema
      * @param string $name    The name of the author
      * @param string $url     Link to images with logo
      */
-    public function setPublisher(string $name, string $logoUrl = null)
+    public function setPublisher(string $name, ?string $logoUrl = null)
     {
         $this->JsonLD['publisher'] = [
             '@type' => 'Organization',

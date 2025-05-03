@@ -163,7 +163,7 @@ class MetaTags
      * Set page link.
      * @param string $url
      */
-    public function setUrl(string $url = null)
+    public function setUrl(?string $url = null)
     {
         if ($url == null) {
             $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -182,7 +182,7 @@ class MetaTags
      * @param int $height     Image height in pixels
      * @param string $alt     A description of what is in the image (not a caption)
      */
-    public function setImage(string $url, int $width = null, int $height = null, string $alt = null)
+    public function setImage(string $url, ?int $width = null, ?int $height = null, ?string $alt = null)
     {
         $this->OpenGraph[] = $this->setOpenGraphMetaTag('og:image',  $url);
         $this->OpenGraph[] = $this->setOpenGraphMetaTag('og:image:secure_url', $url);
@@ -207,7 +207,7 @@ class MetaTags
      * @param int $width      Video width in pixels
      * @param int $height     Video height in pixels
      */
-    public function setVideo(string $url, string $type, int $width = null, int $height = null)
+    public function setVideo(string $url, string $type, ?int $width = null, ?int $height = null)
     {
         $this->OpenGraph[] = $this->setOpenGraphMetaTag('og:video', $url);
         $this->OpenGraph[] = $this->setOpenGraphMetaTag('og:video:secure_url', $url);
@@ -240,7 +240,7 @@ class MetaTags
      * @param string $modified_time    Article last modified date (ISO 8601)
      * @throws Exception 
      */
-    public function setArticleDateTime(string $published_time, string $modified_time = null)
+    public function setArticleDateTime(string $published_time, ?string $modified_time = null)
     {
         if (!preg_match($this->pattern['ISO8601'], $published_time) || ($modified_time != null && !preg_match($this->pattern['ISO8601'], $modified_time))) throw new \Exception('Date must be in ISO 8601 format');
 
@@ -295,7 +295,7 @@ class MetaTags
      * @param string $content
      * @return array
      */
-    protected function setArrayTag(string $name, array $attribute = null, string $content = null)
+    protected function setArrayTag(string $name, ?array $attribute = null, ?string $content = null)
     {
         return [
             'name' => $name,

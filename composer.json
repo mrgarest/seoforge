@@ -3,7 +3,7 @@
     "description": "Simple Laravel SEO Package",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "homepage": "https://github.com/mrgarest/seoforge",
     "keywords": [
         "Garest",
@@ -16,7 +16,6 @@
     "authors": [
         {
             "name": "Garest",
-            "email": "olehhoncharenko98@gmail.com",
             "homepage": "https://github.com/mrgarest"
         }
     ],

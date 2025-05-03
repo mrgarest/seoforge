@@ -100,7 +100,7 @@ class SoftwareApplicationSchema extends \MrGarest\SeoForge\Schema
      * @param float $price       Cost of the application (if the application is free, set the cost to 0)
      * @param string $currency   Currency (with a free application, the currency is not specified)
      */
-    public function setCost(float $price, string $currency = null)
+    public function setCost(float $price, ?string $currency = null)
     {
         $this->JsonLD['offers'] = [
             '@type' => 'Offer',

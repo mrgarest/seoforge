@@ -28,7 +28,7 @@ class LocalBusinessSchema extends \MrGarest\SeoForge\Schema
      * Set a link to the company page
      * @param string $url     Link to company page
      */
-    public function setUrl(string $url = null)
+    public function setUrl(?string $url = null)
     {
         if ($url == null) {
             $url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -67,7 +67,7 @@ class LocalBusinessSchema extends \MrGarest\SeoForge\Schema
      * @param float $latitude
      * @param float $longitude
      */
-    public function setAddress(string $country, string $region, string $city, string $street, string $postCode, float $latitude = null, float $longitude = null)
+    public function setAddress(string $country, string $region, string $city, string $street, string $postCode, ?float $latitude = null, ?float $longitude = null)
     {
         $this->JsonLD['address'] = [
             '@type' => 'PostalAddress',

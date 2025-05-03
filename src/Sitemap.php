@@ -24,7 +24,7 @@ class Sitemap
      * @param float $priority        Page priority (0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
      * @throws Exception
      */
-    public function addItem(string $url, string $lastmod, string $changefreq = null, float $priority = null)
+    public function addItem(string $url, string $lastmod, ?string $changefreq = null, ?float $priority = null)
     {
         if (!preg_match($this->pattern['ISO8601'], $lastmod)) throw new \Exception('Date must be in ISO 8601 format');
         if ($changefreq != null && !in_array($changefreq, $this->changefreq)) throw new \Exception('The page refresh rate value is incorrect.');
